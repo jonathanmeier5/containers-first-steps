@@ -12,6 +12,9 @@ RUN pipenv install --system --clear
 
 COPY ./ ${SRC_DIR}/
 
-WORKDIR ${SRC_DIR}/src/webapp
+COPY files/ /
+RUN chmod +x /usr/local/bin/*
 
-CMD ["flask", "run", "-h", "0.0.0.0"] 
+WORKDIR ${SRC_DIR}/src
+
+CMD ["run-gunicorn"]
